@@ -18,6 +18,37 @@ describe('ProductsController', function () {
     sinon.restore();
   });
 
+  describe('#list', function () {
+    it('deve retornar a lista de produtos', async function () {
+      // Arrange
+      req.body = productMock.productList
+      sinon.stub(productService, 'list').resolves({
+        status: 'SUCCESSFUL',
+        data: req.body
+      });
+
+      // Act
+      await productController.list(req, res)
+
+      // Assert
+      expect(res.status).to.have.been.calledWith(200)
+      expect(res.json).to.have.been.calledWith(productMock.productList)
+    });
+    it('se houver algum erro', async function () {
+      // Arrange
+      sinon.stub(productService, 'list').resolves({
+        status: 'NOT_FOUND',
+        data: { message: 'not found' }
+      });
+
+      // Act
+      await productController.list(req, res)
+
+      // Assert
+      expect(res.status).to.have.been.calledWith(404)
+    });
+  });
+
   describe('#create', function () {
     it('deve salvar ao enviar dados válidos', async function () {
       // Arrange
