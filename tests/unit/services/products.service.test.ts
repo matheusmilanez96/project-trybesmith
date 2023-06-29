@@ -57,4 +57,20 @@ describe('ProductsService', function () {
 
     });
   });
+  // describe('#list', function () {
+  //   it('deve ser possível retornar a lista de produtos', async function () {
+  //     // Arrange
+  //     const mockCreateReturn = ProductModel.build(productMock.productList);
+  //     sinon.stub(ProductModel, 'findAll')
+  //       .resolves(mockCreateReturn);
+
+  //     // Act
+  //     const serviceResponse = await productsService.list();
+
+  //     // Assert
+  //     expect(serviceResponse.status).to.eq('SUCCESSFUL');
+  //     expect(serviceResponse.data).to.deep.eq(productMock.productList);
+
+  //   });
+  // });
 });

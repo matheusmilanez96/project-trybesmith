@@ -1,5 +1,6 @@
 import ProductModel, {
   ProductInputtableTypes,
+  ProductSequelizeModel,
 } from '../database/models/product.model';
 import { Product } from '../types/Product';
 import { ServiceResponse } from '../types/ServiceResponse';
@@ -14,6 +15,12 @@ function validateParams({
   if (!orderId || orderId < 1) return 'orderId is required';
     
   return null;
+}
+
+async function list(): Promise<ServiceResponse<ProductSequelizeModel[]>> {
+  const products = await ProductModel.findAll();
+
+  return { status: 'SUCCESSFUL', data: products };
 }
 
 async function create(
@@ -36,5 +43,6 @@ async function create(
 }
 
 export default {
+  list,
   create,
 };
